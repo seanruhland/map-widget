@@ -1,0 +1,37 @@
+{
+  "name": "snazzymaps",
+  "version": "1.0.0",
+  "description": "App to add a map widget to your website",
+  "main": "app.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server --output-public-path=/build/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seanruhland/map-widget.git"
+  },
+  "keywords": [
+    "map",
+    "widget"
+  ],
+  "author": "Sean Ruhland",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seanruhland/map-widget/issues"
+  },
+  "homepage": "https://github.com/seanruhland/map-widget#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "http-server": "^0.11.1",
+    "webpack": "^3.11.0",
+    "webpack-dev-server": "^2.11.1"
+  },
+  "dependencies": {}
+}
