@@ -1,5 +1,6 @@
-import Styles from './mapStyle'
+// import Styles from './mapStyle'
 
+console.log('test')
 // declare map variable
 var map;
 // configure lat lng coordinates object
