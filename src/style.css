@@ -14,9 +14,8 @@ body {
 	text-align: center;
 }
 .dropdown {
-    position: relative;
-    margin-top:30%;
-    margin-left:30%;
+/*    margin-top:30%;
+    margin-left:30%;*/
 }
 
 .border {
@@ -36,8 +35,26 @@ body {
 
 }
 
+font-effect-vintage
+font-effect-emboss
+font-effect-canvas-print
+
 .mapSelection {
 	display: block;
 
 }
+#upArrow {
+	display: block;
+	margin-bottom: -15px;
+}
+#downArrow {
 
+}
+.fa-caret-up {
+color:blue;
+display:block;
+margin-bottom: -20px;
+}
+.fa-caret-down {
+color:blue;
+}

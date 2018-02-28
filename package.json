@@ -2,6 +2,9 @@
   "name": "snazzymaps",
   "version": "1.0.0",
   "description": "App to add a map widget to your website",
+  "engines": {
+    "node": "4.1.1"
+  },
   "main": "app.js",
   "scripts": {
     "build": "webpack",

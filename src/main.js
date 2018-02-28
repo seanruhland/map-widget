@@ -22,11 +22,9 @@ window.initMap = function() {
 	map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
 	// Set the map's style to the initial value of the selector.
-	// map.setOptions({styles: Styles[style]});
 
 	// Apply new JSON when the user selects a different style.
 	document.getElementById('style-selector').addEventListener('change', function() {
-		// map.setOptions({styles: Styles[style]});
 	//grab the value on the event of a selection
 	var style = document.getElementById('style-selector').value;
 	mapOptions.styles= Styles[style]
