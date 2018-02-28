@@ -5,6 +5,9 @@ html {
 body {
 	height:100%;
 }
+h3 {
+	font-family:;
+}
 
 #map {
         height: 400px;

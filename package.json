@@ -8,7 +8,7 @@
   "main": "app.js",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server --output-public-path=/build/"
+    "start-server": "webpack-dev-server --output-public-path=/build/"
   },
   "repository": {
     "type": "git",
