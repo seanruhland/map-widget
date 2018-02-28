@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "App to add a map widget to your website",
   "engines": {
-    "node": "4.1.1"
+    "node": "8.9.4"
   },
   "main": "app.js",
   "scripts": {
