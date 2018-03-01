@@ -8,18 +8,50 @@ body {
 h3 {
 	font-family:;
 }
+.shadow {
+  box-shadow: 2px 4px 2px #e2e9f5;
+}
+.navbar-custom {
+    background-color: #14688C;
+}
+/* change the brand and text color */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: rgba(255,255,255,.8);
+}
+/* change the link color */
+.navbar-custom .navbar-nav .nav-link {
+    color: rgba(255,255,255,.5);
+}
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #ffffff;
+}
+.main-body {
+  height:100%;
+  margin-top:-5vh;
+}
 
 #map {
-        height: 400px;
+
         width: 100%;
        }
-.header{
-	text-align: center;
+/*.map-div {
+  height:1200px;
+}*/
+
+#map {
+  width:90%;
+  height:80%;
+  margin:0 auto;
+  margin-top:20vh;
 }
-.dropdown {
-/*    margin-top:30%;
-    margin-left:30%;*/
+
+.map-inputs {
+  margin-top:20vh;
 }
+
 
 .border {
 	border:2px solid red;;
@@ -38,26 +70,7 @@ h3 {
 
 }
 
-font-effect-vintage
-font-effect-emboss
-font-effect-canvas-print
-
 .mapSelection {
 	display: block;
 
-}
-#upArrow {
-	display: block;
-	margin-bottom: -15px;
-}
-#downArrow {
-
-}
-.fa-caret-up {
-color:blue;
-display:block;
-margin-bottom: -20px;
-}
-.fa-caret-down {
-color:blue;
 }
