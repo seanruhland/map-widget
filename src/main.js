@@ -13,73 +13,61 @@ var mapOptions = {
 	disableDefaultUI: true
 };
 
+window.initMap = function () {
+	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+	// var card = document.getElementById('pac-card');
+	var input = document.getElementById('pac-input');
+	// var types = document.getElementById('type-selector');
+	var strictBounds = document.getElementById('strict-bounds-selector');
+	var autocomplete = new google.maps.places.Autocomplete(input);
 
+	// Bind the map's bounds (viewport) property to the autocomplete object,
+	// so that the autocomplete requests use the current map bounds for the
+	// bounds option in the request.
+	autocomplete.bindTo('bounds', map);
 
+	var infowindow = new google.maps.InfoWindow();
+	var infowindowContent = document.getElementById('infowindow-content');
+	infowindow.setContent(infowindowContent);
+	var marker = new google.maps.Marker({
+	  map: map,
+	  anchorPoint: new google.maps.Point(0, -29)
+	});
 
+	autocomplete.addListener('place_changed', function() {
+	  infowindow.close();
+	  marker.setVisible(false);
+	  var place = autocomplete.getPlace();
+	  if (!place.geometry) {
+	    // User entered the name of a Place that was not suggested and
+	    // pressed the Enter key, or the Place Details request failed.
+	    window.alert("No details available for input: '" + place.name + "'");
+	    return;
+	  }
 
+	  // If the place has a geometry, then present it on a map.
+	  if (place.geometry.viewport) {
+	    map.fitBounds(place.geometry.viewport);
+	  } else {
+	    map.setCenter(place.geometry.location);
+	    map.setZoom(17);  // Why 17? Because it looks good.
+	  }
+	  marker.setPosition(place.geometry.location);
+	  marker.setVisible(true);
 
- // This example requires the Places library. Include the libraries=places
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+	  var address = '';
+	  if (place.address_components) {
+	    address = [
+	      (place.address_components[0] && place.address_components[0].short_name || ''),
+	      (place.address_components[1] && place.address_components[1].short_name || ''),
+	      (place.address_components[2] && place.address_components[2].short_name || '')
+	    ].join(' ');
+	  }
 
-      window.initMap = function () {
-        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-        // var card = document.getElementById('pac-card');
-        var input = document.getElementById('pac-input');
-        // var types = document.getElementById('type-selector');
-        var strictBounds = document.getElementById('strict-bounds-selector');
-
-        // map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
-
-        var autocomplete = new google.maps.places.Autocomplete(input);
-
-        // Bind the map's bounds (viewport) property to the autocomplete object,
-        // so that the autocomplete requests use the current map bounds for the
-        // bounds option in the request.
-        autocomplete.bindTo('bounds', map);
-
-        var infowindow = new google.maps.InfoWindow();
-        var infowindowContent = document.getElementById('infowindow-content');
-        infowindow.setContent(infowindowContent);
-        var marker = new google.maps.Marker({
-          map: map,
-          anchorPoint: new google.maps.Point(0, -29)
-        });
-
-        autocomplete.addListener('place_changed', function() {
-          infowindow.close();
-          marker.setVisible(false);
-          var place = autocomplete.getPlace();
-          if (!place.geometry) {
-            // User entered the name of a Place that was not suggested and
-            // pressed the Enter key, or the Place Details request failed.
-            window.alert("No details available for input: '" + place.name + "'");
-            return;
-          }
-
-          // If the place has a geometry, then present it on a map.
-          if (place.geometry.viewport) {
-            map.fitBounds(place.geometry.viewport);
-          } else {
-            map.setCenter(place.geometry.location);
-            map.setZoom(17);  // Why 17? Because it looks good.
-          }
-          marker.setPosition(place.geometry.location);
-          marker.setVisible(true);
-
-          var address = '';
-          if (place.address_components) {
-            address = [
-              (place.address_components[0] && place.address_components[0].short_name || ''),
-              (place.address_components[1] && place.address_components[1].short_name || ''),
-              (place.address_components[2] && place.address_components[2].short_name || '')
-            ].join(' ');
-          }
-
-          infowindowContent.children['place-icon'].src = place.icon;
-          infowindowContent.children['place-name'].textContent = place.name;
-          infowindowContent.children['place-address'].textContent = address;
-          infowindow.open(map, marker);
+	  infowindowContent.children['place-icon'].src = place.icon;
+	  infowindowContent.children['place-name'].textContent = place.name;
+	  infowindowContent.children['place-address'].textContent = address;
+	  infowindow.open(map, marker);
 
 		// Apply new JSON when the user selects a different style.
 		document.getElementById('style-selector').addEventListener('change', function() {
@@ -93,150 +81,18 @@ var mapOptions = {
 			console.log(place.geometry.location)
 			// google.maps.event.trigger(map, 'resize');
 		});
-        });
+});
 
-        // setupClickListener('changetype-all', []);
-        // setupClickListener('changetype-address', ['address']);
-        // setupClickListener('changetype-establishment', ['establishment']);
-        // setupClickListener('changetype-geocode', ['geocode']);
-        // Set the map's style to the initial value of the selector.
-
-
-		 var zoomInput = document.getElementById('zoomInput').addEventListener('change', function() {
-		var zoomVal = $("#zoomInput").val();
-		// mapOptions.setZoom= zoom[zoomVal]
-		var zoomInt = parseInt(zoomVal)
-	  	map.setZoom(zoomInt);
-		console.log(zoomInt)
-	});
-// 
-
-      //   document.getElementById('use-strict-bounds')
-      //       .addEventListener('click', function() {
-      //         console.log('Checkbox clicked! New state=' + this.checked);
-      //         autocomplete.setOptions({strictBounds: this.checked});
-      //       });
-      }
+	 var zoomInput = document.getElementById('zoomInput').addEventListener('change', function() {
+	var zoomVal = $("#zoomInput").val();
+	// mapOptions.setZoom= zoom[zoomVal]
+	var zoomInt = parseInt(zoomVal)
+  	map.setZoom(zoomInt);
+	console.log(zoomInt)
+});
 
 
 
-
-
-
-
-
-
-// google maps api callback
-// this gets fired how many times?
-// window.initMap = function() {
-// 	// create new instance of google maps api Map object
-// 	// using our mapOptions
-// 	map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-// 	// Set the map's style to the initial value of the selector.
-
-// 	// Apply new JSON when the user selects a different style.
-// 	document.getElementById('style-selector').addEventListener('change', function() {
-// 		//grab the value on the event of a selection
-// 		var style = document.getElementById('style-selector').value;
-// 		mapOptions.styles= styles[style]
-// 	  	map.setOptions(mapOptions);
-// 		console.log('map is ready')
-// 		// google.maps.event.trigger(map, 'resize');
-// 	});
-
-// var zoomInput = document.getElementById('zoomInput').addEventListener('change', function() {
-// 		var zoomVal = $("#zoomInput").val();
-// 		// mapOptions.setZoom= zoom[zoomVal]
-// 		var zoomInt = parseInt(zoomVal)
-// 	  	map.setZoom(zoomInt);
-// 		console.log(zoomInt)
-// 	});
-// }
-
-// $( "#coordBtn" ).click(function(){
-// 	var city = $('#textBoxId').val()
-// 	$.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + city + '&key=AIzaSyDv0j8FlI2AV25URpSIXR76KBZyW6l56u4', responsHandler)
-// 	console.log(city)
-// });
-// function formSubmit(){
-// 	var city = $('#textBoxId').val()
-// 	// j
-// 	console.log(city)
-// }
-
-function responsHandler(res) {
-		console.log(res) 
-	}
-
-
-
-
-
-// function GetLatlong()
-//     {
-//         var geocoder = new google.maps.Geocoder();
-//         var address = document.getElementById('textboxid').value;
-
-//         geocoder.geocode({ 'address': address }, function (results, status) {
-
-//             if (status == google.maps.GeocoderStatus.OK) {
-//                 var latitude = results[0].geometry.location.lat();
-//                 var longitude = results[0].geometry.location.lng();
-
-//             }
-//         });
-// // 
-
-// var listener = function() {
-//   window.requestAnimationFrame(function() {
-//     document.querySelector("div").innerHTML = rng.value;
-//   });
-// };
-// zoom.addEventListener("mousedown", function() {
-//   listener();
-//   zoom.addEventListener("mousemove", listener);
-// });
-// zoom.addEventListener("mouseup", function() {
-//   zoom.removeEventListener("mousemove", listener);
-// });
-	
-
-// 
-// var zoomDiv = document.getElementById('zoom');
-
-// var listener = function() {
-//   window.requestAnimationFrame(function() {
-//     document.querySelector("div").innerHTML = rng.value;
-//   });
-// };
-
-// rng.addEventListener("mousedown", function() {
-//   listener();
-//   rng.addEventListener("mousemove", listener);
-// });
-// rng.addEventListener("mouseup", function() {
-//   rng.removeEventListener("mousemove", listener);
-// });
-
-  // map = new google.maps.Map(document.getElementById('map'), {
-  //   center: {lat: -33.86, lng: 151.209},
-  //   zoom: 13,
-  //   mapTypeControl: false
-  // });
-
-  // // Add a style-selector control to the map.
-  // var styleControl = document.getElementById('style-selector-control');
-  // map.controls[google.maps.ControlPosition.TOP_LEFT].push(styleControl);
-
-  // // Set the map's style to the initial value of the selector.
-  // var styleSelector = document.getElementById('style-selector');
-  // map.setOptions({styles: styles[styleSelector.value]});
-
-  // // Apply new JSON when the user selects a different style.
-  // styleSelector.addEventListener('change', function() {
-  //   map.setOptions({styles: styles[styleSelector.value]});
-  // });
 
 const styles = {
 	default: null,
