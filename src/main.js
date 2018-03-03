@@ -16,11 +16,13 @@ var mapOptions = {
 
 
 
+
+
  // This example requires the Places library. Include the libraries=places
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-      function initMap() {
+      window.initMap = function () {
         var map = new google.maps.Map(document.getElementById('map'), mapOptions);
         // var card = document.getElementById('pac-card');
         var input = document.getElementById('pac-input');
@@ -78,6 +80,19 @@ var mapOptions = {
           infowindowContent.children['place-name'].textContent = place.name;
           infowindowContent.children['place-address'].textContent = address;
           infowindow.open(map, marker);
+
+		// Apply new JSON when the user selects a different style.
+		document.getElementById('style-selector').addEventListener('change', function() {
+			//grab the value on the event of a selection
+			var style = document.getElementById('style-selector').value;
+			mapOptions.styles= styles[style];
+			mapOptions.center=place.geometry.location;
+			// mapOptions.center = place.geometry.viewport;
+		  	map.setOptions(mapOptions);
+			console.log('map is ready')
+			console.log(place.geometry.location)
+			// google.maps.event.trigger(map, 'resize');
+		});
         });
 
         // setupClickListener('changetype-all', []);
@@ -86,15 +101,6 @@ var mapOptions = {
         // setupClickListener('changetype-geocode', ['geocode']);
         // Set the map's style to the initial value of the selector.
 
-		// Apply new JSON when the user selects a different style.
-		document.getElementById('style-selector').addEventListener('change', function() {
-			//grab the value on the event of a selection
-			var style = document.getElementById('style-selector').value;
-			mapOptions.styles= styles[style]
-		  	map.setOptions(mapOptions);
-			console.log('map is ready')
-			// google.maps.event.trigger(map, 'resize');
-		});
 
 		 var zoomInput = document.getElementById('zoomInput').addEventListener('change', function() {
 		var zoomVal = $("#zoomInput").val();
@@ -105,11 +111,11 @@ var mapOptions = {
 	});
 // 
 
-        document.getElementById('use-strict-bounds')
-            .addEventListener('click', function() {
-              console.log('Checkbox clicked! New state=' + this.checked);
-              autocomplete.setOptions({strictBounds: this.checked});
-            });
+      //   document.getElementById('use-strict-bounds')
+      //       .addEventListener('click', function() {
+      //         console.log('Checkbox clicked! New state=' + this.checked);
+      //         autocomplete.setOptions({strictBounds: this.checked});
+      //       });
       }
 
 
