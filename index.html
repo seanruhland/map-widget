@@ -28,17 +28,15 @@
    <div class="container-fluid main-body">
       <div class='row  main-body'>
         <div class="col-sm-3 text-center  ">
-          <div class="input-group   map-inputs">
-            <input type="text" class="form-control shadow" placeholder="City, State...">
-            <span class="input-group-btn">
-              <button class="btn btn-secondary shadow" type="button">Go!</button>
-            </span>
-          </div>
-        <div id='zoom' class='controls map-inputs shadow'>
-          <label for="zoom">Zoom:</label>
-          <input id="zoomInput" type="range" name="zoom" min="7" max="20" value="10">
-        </div>
-        <div id="style-selector-control"  class="map-control dropdown shadow  map-inputs">
+
+            <!-- <input type="textbox" id='textBoxId' class="form-control shadow" placeholder="City, State..."> -->
+            <!-- <input id="autocomplete" placeholder="Enter your address" type="text"></input> -->
+      <div id="pac-container">
+        <input id="pac-input" class='' type="text"
+            placeholder="Enter a location">
+      </div>
+
+        <div id="style-selector-control"  class=" dropdown shadow  map-inputs">
           <label for="style-selector">Choose your style:</label>
           <select id="style-selector" class="selector-control">
             <option value="default">default</option>
@@ -51,9 +49,40 @@
             <option value="darkFlat">Dark, Flat map</option>
           </select>
         </div>
+        <div id='zoom' class='controls map-inputs shadow'>
+          <label for="zoom">Zoom:</label>
+          <input id="zoomInput" type="range" name="zoom" min="7" max="20" value="10">
+        </div>
         </div>
           <div class='col-sm-9 map-div'>
+            <!-- <div class="pac-card" id="pac-card"> -->
+      <!-- <div> -->
+        
+        <!-- <div id="type-selector" class="pac-controls">
+          <input type="radio" name="type" id="changetype-all" checked="checked">
+          <label for="changetype-all">All</label>
+
+          <input type="radio" name="type" id="changetype-establishment">
+          <label for="changetype-establishment">Establishments</label>
+
+          <input type="radio" name="type" id="changetype-address">
+          <label for="changetype-address">Addresses</label>
+
+          <input type="radio" name="type" id="changetype-geocode">
+          <label for="changetype-geocode">Geocodes</label>
+        </div> -->
+        <!-- <div id="strict-bounds-selector" class="pac-controls">
+          <input type="checkbox" id="use-strict-bounds" value="">
+          <label for="use-strict-bounds">Strict Bounds</label>
+        </div> -->
+      <!-- </div> -->
+    <!-- </div> -->
             <div id="map" class='align-self-center shadow'></div>
+      <div id="infowindow-content">
+        <img src="" width="16" height="16" id="place-icon">
+        <span id="place-name"  class="title"></span><br>
+        <span id="place-address"></span>
+      </div>
           </div>  
       </div>    
   </div>
@@ -61,12 +90,15 @@
 
 
 
-  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+
+  <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
   <script src='src/main.js'></script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCu5JUOpKUaZeWlo5RMa0L2g7Rt3e9WPE4&callback=initMap"
-  type="text/javascript"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCu5JUOpKUaZeWlo5RMa0L2g7Rt3e9WPE4&libraries=places&callback=initMap" type="text/javascript" async defer></script>
 
   </body>
 </html>
